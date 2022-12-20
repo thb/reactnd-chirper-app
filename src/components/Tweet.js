@@ -16,7 +16,7 @@ class Tweet extends Component {
     
     dispatch(handleToggleTweet({
       id: tweet.id,
-      hasLiked: tweet.hasLiked,
+      hasLiked: !tweet.hasLiked,
       authedUser
     }))
   }
