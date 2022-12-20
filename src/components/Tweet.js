@@ -6,12 +6,19 @@ import {
   TiHeartOutline,
   TiHeartFullOutline
 } from "react-icons/ti/index"
-
+import { handleToggleTweet } from "../actions/tweets"
 
 class Tweet extends Component {
   handleLike = (e) => {
     e.preventDefault()
-    // todo: Handle Like Tweet
+    
+    const { dispatch, tweet, authedUser } = this.props
+    
+    dispatch(handleToggleTweet({
+      id: tweet.id,
+      hasLiked: tweet.hasLiked,
+      authedUser
+    }))
   }
 
   toParent = (e, id) => {
@@ -52,7 +59,7 @@ class Tweet extends Component {
           <div className="tweet-icons">
             <TiArrowBackOutline className="tweet-icon" />
             <span>{replies !== 0 && replies}</span>
-            <button className="heart-button">
+            <button className="heart-button" onClick={(e) => this.handleLike(e)} >
               {hasLiked === true
                 ? <TiHeartFullOutline color="#e0245e" className="tweet-icon" />
                 : <TiHeartOutline className="tweet-icon" />}
